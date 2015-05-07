@@ -153,7 +153,7 @@
                 android:textSize="13dp" />
 
             <EditText
-                android:id="@+id/editphon"
+                android:id="@+id/editphone"
                 android:layout_width="220dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"

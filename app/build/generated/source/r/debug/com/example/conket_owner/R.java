@@ -8,71 +8,99 @@
 package com.example.conket_owner;
 
 public final class R {
+    public static final class array {
+        public static final int amount=0x7f040000;
+    }
     public static final class attr {
     }
     public static final class dimen {
-        public static final int activity_horizontal_margin=0x7f040000;
-        public static final int activity_vertical_margin=0x7f040001;
+        public static final int activity_horizontal_margin=0x7f050000;
+        public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
         public static final int afterjoin=0x7f020000;
-        public static final int burgerking=0x7f020001;
-        public static final int camera=0x7f020002;
-        public static final int camera1=0x7f020003;
-        public static final int check=0x7f020004;
-        public static final int chungroksanghoe=0x7f020005;
-        public static final int hanjinsanghoe=0x7f020006;
-        public static final int ic_launcher=0x7f020007;
-        public static final int icon_luncher=0x7f020008;
-        public static final int jongusanghoe=0x7f020009;
-        public static final int kangwoncheonggwa=0x7f02000a;
-        public static final int loading=0x7f02000b;
-        public static final int loginfin=0x7f02000c;
-        public static final int mcdonald=0x7f02000d;
-        public static final int notification=0x7f02000e;
-        public static final int photo=0x7f02000f;
-        public static final int reg=0x7f020010;
-        public static final int slr_camera=0x7f020011;
-        public static final int steamwhistle=0x7f020012;
+        public static final int apples=0x7f020001;
+        public static final int burgerking=0x7f020002;
+        public static final int camera=0x7f020003;
+        public static final int camera1=0x7f020004;
+        public static final int camera2=0x7f020005;
+        public static final int check=0x7f020006;
+        public static final int chungroksanghoe=0x7f020007;
+        public static final int grapes=0x7f020008;
+        public static final int hanjinsanghoe=0x7f020009;
+        public static final int ic_launcher=0x7f02000a;
+        public static final int icon_luncher=0x7f02000b;
+        public static final int jongusanghoe=0x7f02000c;
+        public static final int kangwoncheonggwa=0x7f02000d;
+        public static final int loading=0x7f02000e;
+        public static final int loginfin=0x7f02000f;
+        public static final int mcdonald=0x7f020010;
+        public static final int notification=0x7f020011;
+        public static final int orange=0x7f020012;
+        public static final int photo=0x7f020013;
+        public static final int reg=0x7f020014;
+        public static final int review=0x7f020015;
+        public static final int slr_camera=0x7f020016;
+        public static final int steamwhistle=0x7f020017;
+        public static final int strawberry=0x7f020018;
     }
     public static final class id {
-        public static final int action_settings=0x7f080024;
-        public static final int atologin=0x7f080012;
-        public static final int btnbacklogin=0x7f080001;
-        public static final int btncamera=0x7f08001f;
-        public static final int btncheck=0x7f080009;
-        public static final int btnjoin=0x7f08000f;
-        public static final int btnlogin=0x7f080010;
-        public static final int btnreg=0x7f080002;
-        public static final int btnreserch=0x7f080013;
-        public static final int btnsave=0x7f080023;
-        public static final int btnwrite=0x7f080019;
-        public static final int content=0x7f080005;
-        public static final int couponimage=0x7f080004;
-        public static final int couponlist=0x7f080003;
-        public static final int dday=0x7f080006;
-        public static final int editbeaid=0x7f080022;
-        public static final int editid=0x7f080008;
-        public static final int editna=0x7f08000d;
-        public static final int editphon=0x7f08000e;
-        public static final int editpw=0x7f08000a;
-        public static final int editpwcheck=0x7f08000b;
-        public static final int editstoinfo=0x7f080021;
-        public static final int editstoname=0x7f080020;
-        public static final int editstonum=0x7f08000c;
-        public static final int item_from=0x7f080017;
-        public static final int item_image=0x7f080014;
-        public static final int item_name=0x7f080015;
-        public static final int item_price=0x7f080016;
-        public static final int pager=0x7f080000;
-        public static final int product_list=0x7f080018;
-        public static final int stoid=0x7f080011;
-        public static final int store_comment=0x7f08001d;
-        public static final int store_image=0x7f08001a;
-        public static final int store_name=0x7f08001b;
-        public static final int store_number=0x7f08001c;
-        public static final int storelist=0x7f08001e;
-        public static final int usedornot=0x7f080007;
+        public static final int action_settings=0x7f090037;
+        public static final int atologin=0x7f09001c;
+        public static final int btnbacklogin=0x7f090001;
+        public static final int btncamera=0x7f09002b;
+        public static final int btncheck=0x7f090013;
+        public static final int btnjoin=0x7f090019;
+        public static final int btnlogin=0x7f09001a;
+        public static final int btnreg=0x7f090002;
+        public static final int btnreserch=0x7f09001d;
+        public static final int btnsave=0x7f090011;
+        public static final int btnwrite=0x7f09002a;
+        public static final int camera=0x7f090034;
+        public static final int cameraview=0x7f090008;
+        public static final int chnew=0x7f090028;
+        public static final int chpull=0x7f090010;
+        public static final int chseason=0x7f090029;
+        public static final int content=0x7f090005;
+        public static final int couponimage=0x7f090004;
+        public static final int couponlist=0x7f090003;
+        public static final int dday=0x7f090006;
+        public static final int editamount=0x7f090025;
+        public static final int editbeaid=0x7f090033;
+        public static final int editday=0x7f09000b;
+        public static final int editday2=0x7f09000e;
+        public static final int editeffet=0x7f090027;
+        public static final int editid=0x7f090012;
+        public static final int editinfo=0x7f09000f;
+        public static final int editmonth=0x7f09000a;
+        public static final int editmonth2=0x7f09000d;
+        public static final int editna=0x7f090017;
+        public static final int editorigin=0x7f090024;
+        public static final int editphone=0x7f090018;
+        public static final int editprice=0x7f090023;
+        public static final int editpw=0x7f090014;
+        public static final int editpwcheck=0x7f090015;
+        public static final int editstoinfo=0x7f090032;
+        public static final int editstoname=0x7f090031;
+        public static final int editstonum=0x7f090016;
+        public static final int edityear=0x7f090009;
+        public static final int edityear2=0x7f09000c;
+        public static final int modify=0x7f090036;
+        public static final int pager=0x7f090000;
+        public static final int pro_from=0x7f090021;
+        public static final int pro_image=0x7f09001e;
+        public static final int pro_name=0x7f09001f;
+        public static final int pro_price=0x7f090020;
+        public static final int product_list=0x7f090022;
+        public static final int select=0x7f090035;
+        public static final int spinamount=0x7f090026;
+        public static final int stoid=0x7f09001b;
+        public static final int store_comment=0x7f09002f;
+        public static final int store_image=0x7f09002c;
+        public static final int store_name=0x7f09002d;
+        public static final int store_number=0x7f09002e;
+        public static final int storelist=0x7f090030;
+        public static final int usedornot=0x7f090007;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -86,32 +114,37 @@ public final class R {
         public static final int option=0x7f030008;
         public static final int productitem=0x7f030009;
         public static final int productlist=0x7f03000a;
-        public static final int review=0x7f03000b;
-        public static final int reviewwrite=0x7f03000c;
-        public static final int storeitem=0x7f03000d;
-        public static final int storelist=0x7f03000e;
-        public static final int storereg=0x7f03000f;
+        public static final int productreg=0x7f03000b;
+        public static final int review=0x7f03000c;
+        public static final int reviewwrite=0x7f03000d;
+        public static final int storeitem=0x7f03000e;
+        public static final int storelist=0x7f03000f;
+        public static final int storereg=0x7f030010;
     }
     public static final class menu {
-        public static final int storelist=0x7f070000;
+        public static final int camerapop=0x7f080000;
+        public static final int list=0x7f080001;
+        public static final int modify=0x7f080002;
+        public static final int storelist=0x7f080003;
     }
     public static final class string {
-        public static final int action_settings=0x7f050000;
-        public static final int app_name=0x7f050001;
-        public static final int hello_world=0x7f050002;
+        public static final int action_settings=0x7f060000;
+        public static final int amount=0x7f060001;
+        public static final int app_name=0x7f060002;
+        public static final int hello_world=0x7f060003;
     }
     public static final class style {
-        public static final int ActionBar=0x7f060000;
-        public static final int ActionBarTextColor=0x7f060001;
+        public static final int ActionBar=0x7f070000;
+        public static final int ActionBarTextColor=0x7f070001;
         /**  API 11 theme customizations can go here. 
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060006;
-        public static final int CustomActionBarTheme=0x7f060002;
-        public static final int TabBar=0x7f060003;
+        public static final int AppBaseTheme=0x7f070006;
+        public static final int CustomActionBarTheme=0x7f070002;
+        public static final int TabBar=0x7f070003;
         /**  <item name="android:indicatorStart">#FF4F81</item>    에러 인디케이터 
          */
-        public static final int TabBarStyle=0x7f060004;
-        public static final int TabBarTextColor=0x7f060005;
+        public static final int TabBarStyle=0x7f070004;
+        public static final int TabBarTextColor=0x7f070005;
     }
 }

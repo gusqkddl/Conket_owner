@@ -73,7 +73,7 @@ public class StorelistActivity extends Activity implements OnItemClickListener, 
 
         dia = new ProgressDialog(this);
         dia.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        dia.setMessage("ë¡œë”©ì¤‘..");
+        dia.setMessage("Wait..");
         dia.show();
 
         Intent intent = getIntent();
@@ -234,12 +234,12 @@ public class StorelistActivity extends Activity implements OnItemClickListener, 
     };
 
         private String[] mNames = {
-                "ê°•ì›ì²­ê³¼",
-                "í•œì§„ìƒíšŒ",
-                "ì¢…ìš°ìƒíšŒ",
-                "ì²­ë¡ìƒíšŒ",
-                "ê°•ì›ìƒíšŒ",
-                "ê°ììƒíšŒ"
+                "ê°•ì›ì²?ê³?",
+                "?•œì§„ìƒ?šŒ",
+                "ì¢…ìš°?ƒ?šŒ",
+                "ì²?ë¡ìƒ?šŒ",
+                "ê°•ì›?ƒ?šŒ",
+                "ê°ì?ƒ?šŒ"
         };
 
         private String[] mNumbers = {
@@ -252,12 +252,12 @@ public class StorelistActivity extends Activity implements OnItemClickListener, 
         };
 
         private String[] mComments = {
-                "ã…ã„´ã…‡",
-                "ã…‚ã…ˆã„·",
-                "ã…‹ã…Œã…Š",
-                "ã„¹í˜¸",
-                "ã…›ã…•ã…›ã…‘",
-                "ã…”ã…ã…‘"
+                "?…?„´?…‡",
+                "?…‚?…ˆ?„·",
+                "?…‹?…Œ?…Š",
+                "?„¹?˜¸",
+                "?…›?…•?…›?…‘",
+                "?…”?…?…‘"
         };
         */
 
