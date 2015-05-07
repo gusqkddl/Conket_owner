@@ -1,17 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:orientation="vertical" >
-     <Button
-        android:id="@+id/btnwrite"
-        android:layout_width="300dp"
-        android:layout_height="30dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp"
-        android:background="#aff0dc"
-        android:text="리뷰 작성"
-        android:textColor="#7f7f7f" />
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#FFFFFF" >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/btnwrite"
+            android:layout_width="260dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="#AFF0DC"
+            android:textColor="#7F7F7F"
+            android:textSize="15dp"
+            android:text="리뷰 글쓰기" />
+
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="20dp"
+        android:stretchColumns="1" >
+
+        <View
+            android:layout_height="2dip"
+            android:background="#7F7F7F" />
+
+    </TableLayout>
 
 </LinearLayout>

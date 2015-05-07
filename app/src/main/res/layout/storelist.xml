@@ -7,9 +7,9 @@
 
     <Button
         android:id="@+id/btnreg"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="30dp"
-        android:layout_gravity="right"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:background="#aff0dc"
         android:text="상점 등록"

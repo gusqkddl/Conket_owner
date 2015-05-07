@@ -224,7 +224,7 @@ public class ProductlistFragment extends Fragment {
             mContext = c;
         }
 
-        // ì´ë¯¸ì§€ì…‹ì— ìˆëŠ”ì•„ì´í…œì˜ ìˆ˜ë¥¼ ë°˜í™˜í•¨(ê·¸ë¦¬ë“œë·°ëŠ” ì•„ì´í…œì˜ ìˆ˜ì— í•´ë‹¹í•˜ëŠ” í–‰ë ¬ì„ ì¤€ë¹„í•¨)
+        // ?´ë¯¸ì??…‹?— ?ˆ?Š”?•„?´?…œ?˜ ?ˆ˜ë¥? ë°˜í™˜?•¨(ê·¸ë¦¬?“œë·°ëŠ” ?•„?´?…œ?˜ ?ˆ˜?— ?•´?‹¹?•˜?Š” ?–‰? ¬?„ ì¤?ë¹„í•¨)
         public int getCount() {
             return mNames.size();
         }
@@ -237,7 +237,7 @@ public class ProductlistFragment extends Fragment {
             return 0;
         }
 
-        // ì£¼ì–´ì§„ ìœ„ì¹˜(position)ì— ì¶œë ¥í•  ì´ë¯¸ì§€ë¥¼ ë°˜í™˜í•¨
+        // ì£¼ì–´ì§? ?œ„ì¹?(position)?— ì¶œë ¥?•  ?´ë¯¸ì?ë¥? ë°˜í™˜?•¨
         public View getView(int position, View convertView, ViewGroup parent) {
             ImageView imageView;
             TextView made;
@@ -248,14 +248,14 @@ public class ProductlistFragment extends Fragment {
                 convertView = inflater.inflate(R.layout.productitem, parent, false);
             }
 
-            imageView = (ImageView) convertView.findViewById(R.id.item_image);
+            imageView = (ImageView) convertView.findViewById(R.id.pro_image);
             imageView.setImageBitmap(mImages.get(position));
 
-            made = (TextView) convertView.findViewById(R.id.item_from);
+            made = (TextView) convertView.findViewById(R.id.pro_from);
             made.setText(mMades.get(position));
-            price = (TextView) convertView.findViewById((R.id.item_price));
+            price = (TextView) convertView.findViewById((R.id.pro_price));
             price.setText(mPrices.get(position));
-            name = (TextView) convertView.findViewById(R.id.item_name);
+            name = (TextView) convertView.findViewById(R.id.pro_name);
             name.setText(mNames.get(position));
 
             return convertView;

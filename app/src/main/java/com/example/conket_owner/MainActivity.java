@@ -13,122 +13,122 @@ import android.support.v4.view.ViewPager;
 
 
 public class MainActivity extends FragmentActivity implements
-		ActionBar.TabListener {
+        ActionBar.TabListener {
 
-	SectionsPagerAdapter mSectionsPagerAdapter;
-	ViewPager mViewPager;
+    SectionsPagerAdapter mSectionsPagerAdapter;
+    ViewPager mViewPager;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-		//ï¿½×ºï¿½ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¼Ç¹ï¿½ ï¿½ï¿½ï¿½ï¿½
-		final ActionBar actionBar = getActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Fragmentï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ PagerAdapterï¿½ï¿½ï¿½ï¿½
-		mSectionsPagerAdapter = new SectionsPagerAdapter(
-				getSupportFragmentManager());
+        //?„¤ë¹„ê²Œ?´?…˜ ?ƒ­ ?˜•?‹?œ¼ë¡? ?•¡?…˜ë°? ?„¤? •
+        final ActionBar actionBar = getActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-		// swipeï¿½ï¿½ï¿½ï¿½ï¿½ ViewPagerï¿½ï¿½ï¿½ï¿½
-		mViewPager = (ViewPager) findViewById(R.id.pager);
-		mViewPager.setAdapter(mSectionsPagerAdapter);
+        //?„ ?ƒ?•œ ?ƒ­?˜ Fragmentë¥? ë¦¬í„´?•˜?Š” PagerAdapter?ƒ?„±
+        mSectionsPagerAdapter = new SectionsPagerAdapter(
+                getSupportFragmentManager());
+
+        // swipeê¸°ëŠ¥?˜ ViewPager?„¤? •
+        mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setOffscreenPageLimit(3);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
 
-		// swipe ï¿½Ìºï¿½Æ® Ã³ï¿½ï¿½
-		mViewPager
-				.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-					@Override
-					public void onPageSelected(int position) {
+        // swipe ?´ë²¤íŠ¸ ì²˜ë¦¬
+        mViewPager
+                .setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+                    @Override
+                    public void onPageSelected(int position) {
 
-						actionBar.setSelectedNavigationItem(position);
-					}
-				});
+                        actionBar.setSelectedNavigationItem(position);
+                    }
+                });
 
-		// ï¿½×¼Ç¹Ù¿ï¿½ ï¿½ï¿½ ï¿½ß°ï¿½
-		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
+        // ?•¡?…˜ë°”ì— ?ƒ­ ì¶”ê?
+        for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
 
-			actionBar.addTab(actionBar.newTab()
-					.setText(mSectionsPagerAdapter.getPageTitle(i))
-					.setTabListener(this));
-		}
-	}
+            actionBar.addTab(actionBar.newTab()
+                    .setText(mSectionsPagerAdapter.getPageTitle(i))
+                    .setTabListener(this));
+        }
+    }
 
-	// ï¿½ï¿½ ï¿½ï¿½ï¿½Ã½ï¿½ ï¿½Ìºï¿½Æ® Ã³ï¿½ï¿½
-	@Override
-	public void onTabSelected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) {
+    // ?ƒ­ ?„ ?ƒ?‹œ ?´ë²¤íŠ¸ ì²˜ë¦¬
+    @Override
+    public void onTabSelected(ActionBar.Tab tab,
+                              FragmentTransaction fragmentTransaction) {
 
-		// the ViewPager.
-		mViewPager.setCurrentItem(tab.getPosition());
-	}
+        // the ViewPager.
+        mViewPager.setCurrentItem(tab.getPosition());
+    }
 
-	@Override
-	public void onTabUnselected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) {
+    @Override
+    public void onTabUnselected(ActionBar.Tab tab,
+                                FragmentTransaction fragmentTransaction) {
 
-	}
+    }
 
-	@Override
-	public void onTabReselected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) {
+    @Override
+    public void onTabReselected(ActionBar.Tab tab,
+                                FragmentTransaction fragmentTransaction) {
 
-	}
+    }
 
-	public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-		public SectionsPagerAdapter(FragmentManager fm) {
-			super(fm);
-		}
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
 
-		@Override
-		public Fragment getItem(int position) {
+        @Override
+        public Fragment getItem(int position) {
 
-			Fragment fragment = null;
-			switch (position) {
-			case 0:
-				fragment = ProductlistFragment.newInstance();
-				// Fragmentï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ±ï¿½ï¿½
-				Bundle args = new Bundle();
-				args.putString("Productlist", "ProductlistFragment");
-				fragment.setArguments(args);
-				break;
-			case 1:
-				fragment = CouponFragment.newInstance();
-				break;
-			case 2:
-				fragment = ReviewFragment.newInstance();
-				break;
-			case 3:
-				fragment = OptionFragment.newInstance();
-				break;
-			}// end switch
-			return fragment;
-		}// end getItem
+            Fragment fragment = null;
+            switch (position) {
+                case 0:
+                    fragment = ProductlistFragment.newInstance();
+                    // Fragmentë¡? ? •ë³? ?„˜ê¸°ê¸°
+                    Bundle args = new Bundle();
+                    args.putString("Productlist", "ProductlistFragment");
+                    fragment.setArguments(args);
+                    break;
+                case 1:
+                    fragment = CouponFragment.newInstance();
+                    break;
+                case 2:
+                    fragment = ReviewFragment.newInstance();
+                    break;
+                case 3:
+                    fragment = OptionFragment.newInstance();
+                    break;
+            }// end switch
+            return fragment;
+        }// end getItem
 
-		@Override
-		public int getCount() {
-			// ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-			return 4;
-		}
+        @Override
+        public int getCount() {
+            // ? „ì²? ë³´ì—¬ì¤? ?™”ë©? ?˜?´ì§??ˆ˜
+            return 4;
+        }
 
-		@Override
-		public CharSequence getPageTitle(int position) {
-			Locale l = Locale.getDefault();
-			switch (position) {
-			case 0:
-				return "Product";
-			case 1:
-				return "Coupon";
-			case 2:
-				return "Review";
-			case 3:
-				return "Settings";
-			}
-			return null;
-		}
-	}
+        @Override
+        public CharSequence getPageTitle(int position) {
+            Locale l = Locale.getDefault();
+            switch (position) {
+                case 0:
+                    return "product".toString();
+                case 1:
+                    return "coupon".toString();
+                case 2:
+                    return "review".toString();
+                case 3:
+                    return "settings".toString();
+            }
+            return null;
+        }
+    }
 
 }// end class

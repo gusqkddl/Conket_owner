@@ -5,21 +5,48 @@
     android:background="#FFFFFF"
     android:orientation="vertical" >
 
-    <Button
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:layout_gravity="right"
-        android:layout_marginRight="10dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:background="#aff0dc"
-        android:text="로그아웃"
-        android:textColor="#7f7f7f" />
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:background="#efefef"
+            android:gravity="center"
+            android:text="hansung15"
+            android:textSize="20sp" />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp"
+            android:background="#aff0dc"
+            android:text="로그아웃"
+            android:textColor="#7f7f7f" />
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:stretchColumns="1" >
+
+        <View
+            android:layout_height="2dip"
+            android:background="#7F7F7F" />
+
+    </TableLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:baselineAligned="true" >
 
         <ImageView
@@ -31,12 +58,118 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            
             android:layout_marginTop="5dp"
             android:text="공지사항"
-            android:textSize="25dp" />
+            android:textSize="25sp" />
     </LinearLayout>
-  
-    
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="개인정보 취급방침 변경안내"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="CONKET 봄 이벤트  1탄 종료안내"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="CONKET 서버 점검 공지"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="신상품 업데이트 안내"
+        android:textSize="15sp" />
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:stretchColumns="1" >
+
+        <View
+            android:layout_height="2dip"
+            android:background="#7F7F7F" />
+
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/check" >
+        </ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:text="버전정보"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:background="#efefef"
+            android:gravity="center"
+            android:text="3.1.2"
+            android:textSize="20sp" />
+    </LinearLayout>
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:stretchColumns="1" >
+
+        <View
+            android:layout_height="2dip"
+            android:background="#7F7F7F" />
+
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="220dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:background="#efefef"
+            android:gravity="center"
+            android:text="최신버전이 있습니다"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:background="#aff0dc"
+            android:gravity="center"
+            android:text="업데이트"
+            android:textColor="#7f7f7f"
+            android:textSize="20sp" />
+    </LinearLayout>
 
 </LinearLayout>

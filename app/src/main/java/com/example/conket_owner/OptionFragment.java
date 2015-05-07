@@ -10,17 +10,17 @@ import android.view.ViewGroup;
 public class OptionFragment extends Fragment {
 
     static OptionFragment newInstance() {
-       return new OptionFragment();
+        return new OptionFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-          Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
 
-    	 View v = inflater.inflate(R.layout.option, container, false);
-    	 
+        View v = inflater.inflate(R.layout.option, container, false);
 
-    
-       return v;
+
+
+        return v;
     }
- }
+}

@@ -27,6 +27,7 @@
     <style name="TabBarStyle" parent="android:Widget.Holo.ActionBar.TabView">
         <!-- <item name="android:indicatorStart">#FF4F81</item>    에러 인디케이터 -->
 
+
     </style>
 
 </resources>

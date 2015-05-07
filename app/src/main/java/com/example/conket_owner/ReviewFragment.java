@@ -12,30 +12,30 @@ import android.widget.Button;
 
 public class ReviewFragment extends Fragment {
 
-	Button btnwrite
-	;
+    Button btnwrite
+            ;
     static ReviewFragment newInstance() {
-       return new ReviewFragment();
+        return new ReviewFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-          Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
 
-    	 View v = inflater.inflate(R.layout.review, container, false);
+        View v = inflater.inflate(R.layout.review, container, false);
 
-       btnwrite = (Button) v.findViewById(R.id.btnwrite);
-       btnwrite.setOnClickListener(new View.OnClickListener() {
+        btnwrite = (Button) v.findViewById(R.id.btnwrite);
+        btnwrite.setOnClickListener(new View.OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent write = new Intent(getActivity()
-						.getApplicationContext(), ReviewwriteActivity.class);
-				startActivity(write);
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent write = new Intent(getActivity()
+                        .getApplicationContext(), ReviewwriteActivity.class);
+                startActivity(write);
 
-			}
-		});
-       return v;
+            }
+        });
+        return v;
     }
- }
+}

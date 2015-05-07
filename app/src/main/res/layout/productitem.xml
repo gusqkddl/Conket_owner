@@ -5,34 +5,27 @@
     android:orientation="vertical"
     android:padding="5dp">
 
-    <LinearLayout
-        android:layout_width="150dp"
-        android:layout_height="200dp"
-        android:layout_weight="1">
     <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/item_image" />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="2">
+        android:layout_height="160dp"
+        android:id="@+id/pro_image" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Small Text"
-        android:id="@+id/item_name" />
+        android:id="@+id/pro_name" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Small Text"
-        android:id="@+id/item_price" />
+        android:id="@+id/pro_price" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Small Text"
-        android:id="@+id/item_from" />
-    </LinearLayout>
+        android:id="@+id/pro_from" />
 </LinearLayout>
