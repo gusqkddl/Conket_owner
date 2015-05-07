@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="#FFFFFF" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:baselineAligned="true"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/reg" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="회원가입"
+            android:textSize="25dp" />
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TableRow>
+
+            <TextView
+                android:text="아이디"
+                android:textSize="13dp"
+                android:layout_width="50dp"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp" />
+
+            <EditText
+                android:id="@+id/editid"
+                android:layout_width="220dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:hint="아이디를 입력하세요"
+                android:textSize="13dp" />
+
+            <Button
+                android:id="@+id/btncheck"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:background="#aff0dc"
+                android:text="중복확인"
+                android:textColor="#7f7f7f"
+                android:textSize="13dp" 
+                android:layout_marginLeft="10dp" />
+        </TableRow>
+        <TableRow>
+            <TextView 
+                android:text="비밀번호"
+                android:textSize="13dp" 
+                android:layout_width="50dp"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"/>
+            <EditText
+                android:id="@+id/editpw"
+                android:layout_width="220dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:hint="비밀번호를 입력하세요"
+                android:textSize="13dp" />
+        </TableRow>
+        <TableRow>
+            <TextView 
+                android:text="비밀번호 확인"
+                android:textSize="13dp" 
+                android:layout_width="50dp"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"/>
+            <EditText
+                android:id="@+id/editpwcheck"
+                android:layout_width="220dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:hint="비밀번호를 다시 한 번 입력하세요"
+                android:textSize="13dp" />
+        </TableRow>
+          <TableRow>
+            <TextView 
+                android:text="사업자 번호"
+                android:textSize="13dp" 
+                android:layout_width="50dp"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"/>
+            <EditText
+                android:id="@+id/editstonum"
+                android:layout_width="220dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:hint="사업자 번호를 입력하세요"
+                android:textSize="13dp" />
+        </TableRow>
+        
+            <TableRow>
+            <TextView 
+                android:text="이름"
+                android:textSize="13dp" 
+                android:layout_width="50dp"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"/>
+            <EditText
+                android:id="@+id/editna"
+                android:layout_width="220dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:hint="이름을 입력하세요"
+                android:textSize="13dp" />
+        </TableRow>
+          <TableRow>
+            <TextView 
+                android:text="전화번호"
+                android:textSize="13dp" 
+                android:layout_width="50dp" 
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"/>
+            <EditText
+                android:id="@+id/editphon"
+                android:layout_width="220dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:hint="전화번호를 입력하세요"
+                android:textSize="13dp" />
+        </TableRow>
+
+    </TableLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:baselineAligned="true"
+        android:orientation="vertical" >
+          
+        <Button
+                android:id="@+id/btnjoin"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:background="#aff0dc"
+                android:text="가입"
+                android:textColor="#7f7f7f"
+                android:textSize="15dp" 
+                android:layout_marginRight="10dp"
+                android:layout_gravity="right" />          
+        
+        </LinearLayout>
+</LinearLayout>

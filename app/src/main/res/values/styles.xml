@@ -1,0 +1,32 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="CustomActionBarTheme" parent="@android:style/Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/ActionBar</item>
+        <item name="android:actionBarTabBarStyle">@style/TabBar</item>
+        <item name="android:actionBarTabTextStyle">@style/TabBarTextColor</item>
+        <item name="android:actionBarTabStyle">@style/TabBarStyle</item>
+    </style>
+
+    <style name="ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
+        <item name="android:background">#AFF0DC</item>
+        <item name="android:titleTextStyle">@style/ActionBarTextColor</item>
+    </style>
+
+    <style name="ActionBarTextColor" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">#FF4F81</item>
+    </style>
+
+    <style name="TabBar" parent="@android:style/Widget.Holo.ActionBar.TabBar">
+        <item name="android:background">#FFBCAF</item>
+    </style>
+
+    <style name="TabBarTextColor" parent="android:TextAppearance">
+        <item name="android:textColor">#FF4F81</item>
+    </style>
+
+    <style name="TabBarStyle" parent="android:Widget.Holo.ActionBar.TabView">
+        <!-- <item name="android:indicatorStart">#FF4F81</item>    에러 인디케이터 -->
+
+    </style>
+
+</resources>
