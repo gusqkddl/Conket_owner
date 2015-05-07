@@ -39,8 +39,8 @@ public class JoinActivity extends Activity implements OnClickListener  {
     boolean idcheck = false;
     ProgressDialog dia;
 
-    String url = "http://192.168.219.103:12345/DBServer/JSPServer/ID_Confirm.jsp";
-    String url2 = "http://192.168.219.103:12345/DBServer/JSPServer/Join.jsp";
+    String url = "http://182.219.219.143:12345/DBServer/JSPServer/ID_Confirm.jsp";
+    String url2 = "http://182.219.219.143:12345/DBServer/JSPServer/Join.jsp";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

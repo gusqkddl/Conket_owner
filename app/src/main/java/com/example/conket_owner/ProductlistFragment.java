@@ -61,8 +61,8 @@ public class ProductlistFragment extends Fragment {
     private List<String> mImage_paths = new ArrayList<String>();
     private List<Bitmap> mImages = new ArrayList<Bitmap>();
 
-    String url = "http://192.168.219.103:12345/DBServer/JSPServer/Product_info.jsp";
-    String url2 = "http://192.168.219.103:12345/DBServer/img/product/";
+    String url = "http://182.219.219.143:12345/DBServer/JSPServer/Product_info.jsp";
+    String url2 = "http://182.219.219.143:12345/DBServer/img/product/";
 
     static ProductlistFragment newInstance() {
         return new ProductlistFragment();

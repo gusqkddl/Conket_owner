@@ -31,7 +31,7 @@ public class LoginActivity extends Activity implements OnClickListener {
     Button btnjoin, btnlogin, btnreserch;
     EditText editid, editpw;
 
-    String url = "http://192.168.219.103:12345/DBServer/JSPServer/Login.jsp";
+    String url = "http://182.219.219.143:12345/DBServer/JSPServer/Login.jsp";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

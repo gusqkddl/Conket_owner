@@ -50,8 +50,8 @@ public class CouponFragment extends Fragment {
     private List<String> mImage_paths = new ArrayList<String>();
     private List<Bitmap> mImages = new ArrayList<Bitmap>();
 
-    String url = "http://192.168.219.103:12345/DBServer/JSPServer/Coupon_info.jsp";
-    String url2 = "http://192.168.219.103:12345/DBServer/img/coupon/";
+    String url = "http://182.219.219.143:12345/DBServer/JSPServer/Coupon_info.jsp";
+    String url2 = "http://182.219.219.143:12345/DBServer/img/coupon/";
 
 	static CouponFragment newInstance() {
 		return new CouponFragment();
@@ -213,7 +213,7 @@ public class CouponFragment extends Fragment {
             mContext = c;
         }
 
-        // ì´ë¯¸ì§€ì…‹ì— ìˆëŠ”ì•„ì´í…œì˜ ìˆ˜ë¥¼ ë°˜í™˜í•¨(ê·¸ë¦¬ë“œë·°ëŠ” ì•„ì´í…œì˜ ìˆ˜ì— í•´ë‹¹í•˜ëŠ” í–‰ë ¬ì„ ì¤€ë¹„í•¨)
+        // ?´ë¯¸ì??…‹?— ?ˆ?Š”?•„?´?…œ?˜ ?ˆ˜ë¥? ë°˜í™˜?•¨(ê·¸ë¦¬?“œë·°ëŠ” ?•„?´?…œ?˜ ?ˆ˜?— ?•´?‹¹?•˜?Š” ?–‰? ¬?„ ì¤?ë¹„í•¨)
         public int getCount() {
             return mImages.size();
         }
@@ -226,7 +226,7 @@ public class CouponFragment extends Fragment {
             return 0;
         }
 
-        // ì£¼ì–´ì§„ ìœ„ì¹˜(position)ì— ì¶œë ¥í•  ì´ë¯¸ì§€ë¥¼ ë°˜í™˜í•¨
+        // ì£¼ì–´ì§? ?œ„ì¹?(position)?— ì¶œë ¥?•  ?´ë¯¸ì?ë¥? ë°˜í™˜?•¨
         public View getView(int position, View convertView, ViewGroup parent) {
             ImageView imageView;
             TextView content;
@@ -248,9 +248,9 @@ public class CouponFragment extends Fragment {
             return convertView;
         }
 
-        // ì¶œë ¥ë  ì´ë¯¸ì§€ ë°ì´í„°ì…‹(res/drawable í´ë”)
-        // ì–´ëŠ ì•¡í‹°ë¹„í‹°ì—ì„œ ë¶ˆëŸ¬ì˜¤ëŠ”ì§€ì— ë”°ë¼ ì„œë²„ì— ìš”ì²­í•˜ëŠ” ë°ì´í„°ë„ ë‹¬ë¼ì ¸ì•¼í•¨
-        //ì—¬ê¸° ë¶€ë¶„ ë‹¤ì‹œ ìˆ˜ì •í•´ì•¼ë¨.
+        // ì¶œë ¥?  ?´ë¯¸ì? ?°?´?„°?…‹(res/drawable ?´?”)
+        // ?–´?Š ?•¡?‹°ë¹„í‹°?—?„œ ë¶ˆëŸ¬?˜¤?Š”ì§??— ?”°?¼ ?„œë²„ì— ?š”ì²??•˜?Š” ?°?´?„°?„ ?‹¬?¼? ¸?•¼?•¨
+        //?—¬ê¸? ë¶?ë¶? ?‹¤?‹œ ?ˆ˜? •?•´?•¼?¨.
 
     }
 
