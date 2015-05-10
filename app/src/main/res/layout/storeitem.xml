@@ -1,39 +1,37 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:padding="5dp">
+    android:padding="8dp">
 
-    <LinearLayout
-        android:layout_width="70dp"
-        android:layout_height="120dp"
-        android:layout_weight="1">
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/store_image" />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
+    <com.android.volley.toolbox.NetworkImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="8dp"
+        android:id="@+id/store_image" />
+    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="2">
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="60dp"
-            android:text="New Text"
-            android:textSize="25dp"
-            android:id="@+id/store_name" />
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="30dp"
-            android:text="New Text"
-            android:id="@+id/store_number" />
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="30dp"
-            android:text="New Text"
-            android:id="@+id/store_comment" />
-    </LinearLayout>
-
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/store_image"
+        android:layout_toRightOf="@+id/store_image"
+        android:text="New Text"
+        android:textSize="25dp"
+        android:id="@+id/store_name" />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/store_name"
+        android:layout_marginTop="1dip"
+        android:layout_toRightOf="@+id/store_image"
+        android:text="New Text"
+        android:id="@+id/store_number" />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/store_number"
+        android:layout_marginTop="1dip"
+        android:layout_toRightOf="@+id/store_image"
+        android:text="New Text"
+        android:id="@+id/store_comment" />
+</RelativeLayout>

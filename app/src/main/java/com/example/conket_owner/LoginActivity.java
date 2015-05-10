@@ -9,6 +9,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.android.volley.*;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -20,11 +25,15 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends Activity implements OnClickListener {
 
@@ -62,95 +71,47 @@ public class LoginActivity extends Activity implements OnClickListener {
                 startActivity(join);
                 break;
             case R.id.btnlogin:
-                new loginProcess().execute(url);
+                loginProcess(url);
                 break;
         }
     }
 
-    //네트워크는 멀티스레드로 해야 에러가 안남
-    private class loginProcess extends AsyncTask<String, String, InputStream> {
+    void loginProcess(String url) {
+        RequestQueue queue = Volley.newRequestQueue(this);
 
-        @Override
-        protected InputStream doInBackground(String... arg0) {
-            return getData((String) arg0[0]);
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        protected void onPostExecute(InputStream is) {
-            try {
-                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-                XmlPullParser parser = factory.newPullParser();
-                factory.setNamespaceAware(true);
-
-                parser.setInput(is, "utf-8");
-
-                int eventType = parser.getEventType();
-                String tagName = "";
-                boolean isItemTag = false;
-
-                while (eventType != XmlPullParser.END_DOCUMENT) {
-                    if (eventType == XmlPullParser.START_TAG) {
-                        tagName = parser.getName();
-                        if (tagName.equals("info"))
-                            isItemTag = true;
-                    } else if (eventType == XmlPullParser.TEXT && isItemTag) {
-                        if (tagName.equals("login")) {
-                            //로그인성공
-                            if (parser.getText().equals("success")) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string.
+                        try {
+                            JSONObject json = new JSONObject(response);
+                            String confirm = json.getString("login");
+                            if (confirm.equals("success")) {
                                 Intent login = new Intent(LoginActivity.this, StorelistActivity.class);
                                 login.putExtra("id", editid.getText().toString());
                                 startActivity(login);
-                            }
-                            //로그인실패
-                            else {
+                            } else if(confirm.equals("fail")) {
                                 System.out.println("로그인실패");
                             }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    } else if (eventType == XmlPullParser.END_TAG) {
-                        tagName = parser.getName();
-                        if (tagName.equals("info"))
-                            isItemTag = false;
-                        break;
                     }
-                    eventType = parser.next();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //mTextView.setText("That didn't work!");
             }
-        }
-
-        private InputStream getData(String url) {
-
-            HttpClient http = new DefaultHttpClient();
-            try {
-
-                ArrayList<NameValuePair> nameValuePairs =
-                        new ArrayList<NameValuePair>();
-                nameValuePairs.add(new BasicNameValuePair("user_id", editid.getText().toString()));
-                nameValuePairs.add(new BasicNameValuePair("user_pw", editpw.getText().toString()));
-
-                HttpParams params = http.getParams();
-                HttpConnectionParams.setConnectionTimeout(params, 5000);
-                HttpConnectionParams.setSoTimeout(params, 5000);
-
-                HttpPost httpPost = new HttpPost(url);
-                UrlEncodedFormEntity entityRequest =
-                        new UrlEncodedFormEntity(nameValuePairs, "UTF-8");
-
-                httpPost.setEntity(entityRequest);
-
-                HttpResponse responsePost = http.execute(httpPost);
-                HttpEntity resEntity = responsePost.getEntity();
-
-                return resEntity.getContent();
-
-            } catch (Exception e) {
-                return null;
+        }){
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("user_id", editid.getText().toString());
+                params.put("user_pw", editpw.getText().toString());
+                return params;
             }
-        }
+        };
+        queue.add(stringRequest);
     }
 }

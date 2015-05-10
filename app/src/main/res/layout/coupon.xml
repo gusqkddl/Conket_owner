@@ -13,7 +13,7 @@
         android:background="#aff0dc"
         android:text="쿠폰등록"
         android:textColor="#7f7f7f" />
-    <GridView
+    <ListView
         android:id="@+id/couponlist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

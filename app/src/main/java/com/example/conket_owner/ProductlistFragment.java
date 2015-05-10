@@ -2,6 +2,7 @@ package com.example.conket_owner;
 
 import android.app.Activity;
 import android.app.LoaderManager;
+import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.CursorLoader;
@@ -26,6 +27,17 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -37,6 +49,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
@@ -44,7 +59,9 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class ProductlistFragment extends Fragment {
@@ -54,12 +71,10 @@ public class ProductlistFragment extends Fragment {
     View v;
     LayoutInflater inflater;
     String shop_id;
+    ProgressDialog dia;
 
-    private List<String> mNames = new ArrayList<String>();
-    private List<String> mMades = new ArrayList<String>();
-    private List<String> mPrices = new ArrayList<String>();
-    private List<String> mImage_paths = new ArrayList<String>();
-    private List<Bitmap> mImages = new ArrayList<Bitmap>();
+    List<Product> productItems = new ArrayList<Product>();
+    ProductAdapter adapter;
 
     String url = "http://182.219.219.143:12345/DBServer/JSPServer/Product_info.jsp";
     String url2 = "http://182.219.219.143:12345/DBServer/img/product/";
@@ -75,8 +90,13 @@ public class ProductlistFragment extends Fragment {
         this.inflater = inflater;
         v = inflater.inflate(R.layout.productlist, container, false);
 
+        dia = new ProgressDialog(v.getContext());
+        dia.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dia.setMessage("Wait..");
+        dia.show();
+
         Intent intent = getActivity().getIntent();
-        shop_id = intent.getStringExtra("id");
+        shop_id = intent.getStringExtra("shop_id");
 
         btnreg = (Button)v.findViewById(R.id.btnreg);
         btnreg.setOnClickListener(new View.OnClickListener() {
@@ -89,174 +109,100 @@ public class ProductlistFragment extends Fragment {
             }
         });
 
-
         gridView = (GridView)v.findViewById(R.id.product_list);
-
-        new ProductInfoSend().execute(url);
+        adapter = new ProductAdapter(v.getContext());
+        gridView.setAdapter(adapter);
+        getProductInfo(url);
 
         return v;
     }
 
-    private class ProductInfoSend extends AsyncTask<String,String,InputStream> {
-        @Override
-        protected InputStream doInBackground(String... arg0) {
-            return getData((String)arg0[0]);
-        }
+    void getProductInfo(String url) {
+        RequestQueue queue = Volley.newRequestQueue(v.getContext());
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            for(int i = 0; i < jsonArray.length() ; i++)
+                            {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                Product product = new Product();
+                                product.setName(jsonObject.getString("name"));
+                                product.setNumber(jsonObject.getString("origin"));
+                                product.setComment(jsonObject.getString("price"));
+                                product.setId(jsonObject.getString("goods_id"));
+                                product.setImage_path(jsonObject.getString("img_path"));
 
-        protected void onPostExecute(InputStream is) {
-            try {
-                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-                XmlPullParser parser = factory.newPullParser();
-                factory.setNamespaceAware(true);
+                                productItems.add(product);
+                            }
 
-                parser.setInput(is, "utf-8");
-
-                int eventType = parser.getEventType();
-                String tagName = "";
-                boolean isItemTag = false;
-
-                int pos=0;
-                while (eventType != XmlPullParser.END_DOCUMENT) {
-                    if (eventType == XmlPullParser.START_TAG) {
-                        tagName = parser.getName();
-                        if (tagName.equals("info"))
-                            isItemTag = true;
-                    } else if (eventType == XmlPullParser.TEXT && isItemTag) {
-                        if (tagName.equals("name")) {
-                            mNames.add(pos,parser.getText());
-                        } else if (tagName.equals("made")) {
-                            mMades.add(pos, parser.getText());
-                        } else if (tagName.equals("price")) {
-                            mPrices.add(pos, parser.getText());
-                        } else if (tagName.equals("img_path")) {
-                            mImage_paths.add(pos++,parser.getText());
-                        }
-                    } else if (eventType == XmlPullParser.END_TAG) {
-                        tagName = parser.getName();
-                        if (tagName.equals("info")) {
-                            isItemTag = false;
-                            break;
+                            adapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
                     }
-                    eventType = parser.next();
-                }
-                for(int i = 0 ; i < mNames.size(); i++)
-                    new ProductImgSend().execute(url2+mImage_paths.get(i));
-
-            }catch (Exception e) {
-                e.printStackTrace();
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //mTextView.setText("That didn't work!");
             }
-
-        }
-
-        private InputStream getData(String url)
-        {
-            HttpClient http = new DefaultHttpClient();
-            try {
-
-                ArrayList<NameValuePair> nameValuePairs =
-                        new ArrayList<NameValuePair>();
-                nameValuePairs.add(new BasicNameValuePair("shop_id", shop_id));
-
-                HttpParams params = http.getParams();
-                HttpConnectionParams.setConnectionTimeout(params, 5000);
-                HttpConnectionParams.setSoTimeout(params, 5000);
-
-                HttpPost httpPost = new HttpPost(url);
-                UrlEncodedFormEntity entityRequest =
-                        new UrlEncodedFormEntity(nameValuePairs, "UTF-8");
-
-                httpPost.setEntity(entityRequest);
-
-                HttpResponse responsePost = http.execute(httpPost);
-                HttpEntity resEntity = responsePost.getEntity();
-
-                return resEntity.getContent();
-
-            } catch(Exception e){return null;}
-        }
+        }){
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("shop_id", shop_id);
+                return params;
+            }
+        };
+        queue.add(stringRequest);
     }
 
-    private class ProductImgSend extends AsyncTask<String, Integer, Bitmap> {
-        Bitmap bmImg;
-        InputStream is;
+    public class ProductAdapter extends BaseAdapter {
+        private LayoutInflater inflater;
+        ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
-        @Override
-        protected Bitmap doInBackground(String... urls) {
-            // TODO Auto-generated method stub
-            is = getData(urls[0]);
-            bmImg = BitmapFactory.decodeStream(is);
-            return bmImg;
+        public ProductAdapter(Context c) {
+            inflater = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
-        protected void onPostExecute(Bitmap img){
-            mImages.add(img);
-            if(mImages.size() == mNames.size()) {
-                gridView.setAdapter(new GridAdapter(v.getContext()));
-            }
-        }
-
-        private InputStream getData(String url)
-        {
-            HttpClient http = new DefaultHttpClient();
-            try {
-                URL myFileUrl = new URL(url);
-                HttpURLConnection conn = (HttpURLConnection)myFileUrl.openConnection();
-                conn.setDoInput(true);
-                conn.connect();
-
-                return conn.getInputStream();
-
-            } catch(Exception e){return null;}
-        }
-
-    }
-
-    private class GridAdapter extends BaseAdapter {
-        private Context mContext;
-
-        private GridAdapter(Context c) {
-            mContext = c;
-        }
-
-        // ?ù¥ÎØ∏Ï??Öã?óê ?ûà?äî?ïÑ?ù¥?Öú?ùò ?àòÎ•? Î∞òÌôò?ï®(Í∑∏Î¶¨?ìúÎ∑∞Îäî ?ïÑ?ù¥?Öú?ùò ?àò?óê ?ï¥?ãπ?ïò?äî ?ñâ?†¨?ùÑ Ï§?ÎπÑÌï®)
         public int getCount() {
-            return mNames.size();
+            return productItems.size();
         }
 
         public Object getItem(int position) {
-            return null;
+            return productItems.get(position);
         }
 
         public long getItemId(int position) {
-            return 0;
+            return position;
         }
 
-        // Ï£ºÏñ¥Ïß? ?úÑÏπ?(position)?óê Ï∂úÎ†•?ï† ?ù¥ÎØ∏Ï?Î•? Î∞òÌôò?ï®
         public View getView(int position, View convertView, ViewGroup parent) {
-            ImageView imageView;
-            TextView made;
-            TextView price;
+            NetworkImageView imageView;
             TextView name;
+            TextView origin;
+            TextView price;
 
             if (convertView == null) {
                 convertView = inflater.inflate(R.layout.productitem, parent, false);
             }
 
-            imageView = (ImageView) convertView.findViewById(R.id.pro_image);
-            imageView.setImageBitmap(mImages.get(position));
+            Product product = productItems.get(position);
 
-            made = (TextView) convertView.findViewById(R.id.pro_from);
-            made.setText(mMades.get(position));
-            price = (TextView) convertView.findViewById((R.id.pro_price));
-            price.setText(mPrices.get(position));
+            imageView = (NetworkImageView) convertView.findViewById(R.id.pro_image);
+            imageView.setImageUrl(url2+product.getImage_path(), imageLoader);
+
             name = (TextView) convertView.findViewById(R.id.pro_name);
-            name.setText(mNames.get(position));
+            name.setText(productItems.get(position).getNumber());
+            origin = (TextView) convertView.findViewById((R.id.pro_from));
+            origin.setText(productItems.get(position).getComment());
+            price = (TextView) convertView.findViewById(R.id.pro_price);
+            price.setText(productItems.get(position).getName());
+
+            dia.dismiss();
 
             return convertView;
         }

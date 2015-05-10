@@ -27,6 +27,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -37,6 +47,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
@@ -46,25 +59,22 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class StorelistActivity extends Activity implements OnItemClickListener, OnClickListener{
     Activity act = this;
-    GridView gridView;
+    ListView listView;
     Button btnreg;
-
-    private List<String> mNames = new ArrayList<String>();
-    private List<String> mNumbers = new ArrayList<String>();
-    private List<String> mComments = new ArrayList<String>();
-    private List<String> mImage_paths = new ArrayList<String>();
-    private List<String> mIds = new ArrayList<String>();
-    private List<Bitmap> mImages = new ArrayList<Bitmap>();
 
     String user_id;
     String url = "http://182.219.219.143:12345/DBServer/JSPServer/Store_info.jsp";
     String url2 = "http://182.219.219.143:12345/DBServer/img/store/";
 
     ProgressDialog dia;
+    private List<Store> storeItems = new ArrayList<Store>();
+    private StoreAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,19 +89,20 @@ public class StorelistActivity extends Activity implements OnItemClickListener, 
         Intent intent = getIntent();
         user_id = intent.getStringExtra("id");
 
-        gridView = (GridView) findViewById(R.id.storelist);
-        //gridView.setAdapter(new StoreAdapter(this));
+        listView = (ListView) findViewById(R.id.storelist);
+        adapter = new StoreAdapter(this);
+        listView.setAdapter(adapter);
+        getStoreInfo(url);
 
         btnreg = (Button) findViewById(R.id.btnreg);
         btnreg.setOnClickListener(this);
+        listView.setOnItemClickListener(this);
 
-        gridView.setOnItemClickListener(this);
-        new StoreInfoSend().execute(url);
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.putExtra("id", mIds.get(position).toString());
+        intent.putExtra("shop_id", storeItems.get(position).getId());
         startActivity(intent);
     }
 
@@ -100,205 +111,92 @@ public class StorelistActivity extends Activity implements OnItemClickListener, 
 		// TODO Auto-generated method stub
 		Intent storereg = new Intent(this, StoreregActivity.class);
 		startActivity(storereg);
-
 	}
 
-    private class StoreInfoSend extends AsyncTask<String,String,InputStream> {
-        @Override
-        protected InputStream doInBackground(String... arg0) {
-                return getData((String)arg0[0]);
-        }
+    void getStoreInfo(String url) {
+        RequestQueue queue = Volley.newRequestQueue(this);
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            for(int i = 0; i < jsonArray.length() ; i++)
+                            {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                Store store = new Store();
+                                store.setName(jsonObject.getString("name"));
+                                store.setNumber(jsonObject.getString("number"));
+                                store.setComment(jsonObject.getString("comment"));
+                                store.setId(jsonObject.getString("id"));
+                                store.setImage_path(jsonObject.getString("img_path"));
 
-        protected void onPostExecute(InputStream is) {
-            try {
-                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-                XmlPullParser parser = factory.newPullParser();
-                factory.setNamespaceAware(true);
+                                storeItems.add(store);
+                            }
 
-                parser.setInput(is, "utf-8");
-
-                int eventType = parser.getEventType();
-                String tagName = "";
-                boolean isItemTag = false;
-
-                int pos=0;
-                while (eventType != XmlPullParser.END_DOCUMENT) {
-                    if (eventType == XmlPullParser.START_TAG) {
-                        tagName = parser.getName();
-                        if (tagName.equals("info"))
-                            isItemTag = true;
-                    } else if (eventType == XmlPullParser.TEXT && isItemTag) {
-                        if (tagName.equals("shop_name")) {
-                            mNames.add(pos,parser.getText());
-                        } else if (tagName.equals("cor_num")) {
-                            mNumbers.add(pos, parser.getText());
-                        } else if (tagName.equals("shop_info")) {
-                            mComments.add(pos, parser.getText());
-                        } else if (tagName.equals("img_path")) {
-                            mImage_paths.add(pos,parser.getText());
-                        } else if (tagName.equals("shop_id")) {
-                            mIds.add(pos++,parser.getText());
-                        }
-                    } else if (eventType == XmlPullParser.END_TAG) {
-                        tagName = parser.getName();
-                        if (tagName.equals("info")) {
-                            isItemTag = false;
-                            break;
+                            adapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
                     }
-                    eventType = parser.next();
-                }
-                for(int i = 0 ; i < mNames.size(); i++)
-                    new StoreImgSend().execute(url2+mImage_paths.get(i));
-
-            }catch (Exception e) {
-                e.printStackTrace();
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //mTextView.setText("That didn't work!");
             }
-
-        }
-
-        private InputStream getData(String url)
-        {
-            HttpClient http = new DefaultHttpClient();
-            try {
-
-                ArrayList<NameValuePair> nameValuePairs =
-                        new ArrayList<NameValuePair>();
-                nameValuePairs.add(new BasicNameValuePair("user_id", user_id));
-
-                HttpParams params = http.getParams();
-                HttpConnectionParams.setConnectionTimeout(params, 5000);
-                HttpConnectionParams.setSoTimeout(params, 5000);
-
-                HttpPost httpPost = new HttpPost(url);
-                UrlEncodedFormEntity entityRequest =
-                        new UrlEncodedFormEntity(nameValuePairs, "UTF-8");
-
-                httpPost.setEntity(entityRequest);
-
-                HttpResponse responsePost = http.execute(httpPost);
-                HttpEntity resEntity = responsePost.getEntity();
-
-                return resEntity.getContent();
-
-            } catch(Exception e){return null;}
-        }
-    }
-
-    private class StoreImgSend extends AsyncTask<String, Integer, Bitmap> {
-        Bitmap bmImg;
-        InputStream is;
-
-        @Override
-        protected Bitmap doInBackground(String... urls) {
-            // TODO Auto-generated method stub
-                is = getData(urls[0]);
-                bmImg = BitmapFactory.decodeStream(is);
-            return bmImg;
-        }
-
-        protected void onPostExecute(Bitmap img){
-            mImages.add(img);
-            if(mImages.size() == mNames.size()) {
-                gridView.setAdapter(new StoreAdapter(act));
+        }){
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("user_id", user_id);
+                return params;
             }
-        }
-
-        private InputStream getData(String url)
-        {
-            HttpClient http = new DefaultHttpClient();
-            try {
-                URL myFileUrl = new URL(url);
-                HttpURLConnection conn = (HttpURLConnection)myFileUrl.openConnection();
-                conn.setDoInput(true);
-                conn.connect();
-
-                return conn.getInputStream();
-
-            } catch(Exception e){return null;}
-        }
-
+        };
+        queue.add(stringRequest);
     }
-    /*
-    private List<Integer> mImages = {
-            R.drawable.kangwoncheonggwa,
-            R.drawable.hanjinsanghoe,
-            R.drawable.jongusanghoe,
-            R.drawable.chungroksanghoe,
-            //R.drawable.kangwoncheonggwa
-    };
-
-        private String[] mNames = {
-                "Í∞ïÏõêÏ≤?Í≥?",
-                "?ïúÏßÑÏÉÅ?öå",
-                "Ï¢ÖÏö∞?ÉÅ?öå",
-                "Ï≤?Î°ùÏÉÅ?öå",
-                "Í∞ïÏõê?ÉÅ?öå",
-                "Í∞êÏûê?ÉÅ?öå"
-        };
-
-        private String[] mNumbers = {
-                "111-1111",
-                "222-2222",
-                "333-3333",
-                "444-4444",
-                "555-5555",
-                "666-6666"
-        };
-
-        private String[] mComments = {
-                "?ÖÅ?Ñ¥?Öá",
-                "?ÖÇ?Öà?Ñ∑",
-                "?Öã?Öå?Öä",
-                "?Ñπ?ò∏",
-                "?Öõ?Öï?Öõ?Öë",
-                "?Öî?Öê?Öë"
-        };
-        */
 
     public class StoreAdapter extends BaseAdapter {
-        LayoutInflater inflater;
+        private LayoutInflater inflater;
+        ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
         public StoreAdapter(Context c) {
             inflater = (LayoutInflater) act.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
         public int getCount() {
-            return mComments.size();
+            return storeItems.size();
         }
 
         public Object getItem(int position) {
-            return null;
+            return storeItems.get(position);
         }
 
         public long getItemId(int position) {
-            return 0;
+            return position;
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
-            ImageView imageView;
+            NetworkImageView imageView;
             TextView number;
-            TextView detail;
+            TextView comment;
             TextView name;
 
             if (convertView == null) {
                 convertView = inflater.inflate(R.layout.storeitem, parent, false);
             }
 
-            imageView = (ImageView) convertView.findViewById(R.id.store_image);
-            imageView.setImageBitmap(mImages.get(position));
+            Store store = storeItems.get(position);
+
+            imageView = (NetworkImageView) convertView.findViewById(R.id.store_image);
+            imageView.setImageUrl(url2+store.getImage_path(), imageLoader);
 
             number = (TextView) convertView.findViewById(R.id.store_number);
-            number.setText(mNumbers.get(position));
-            detail = (TextView) convertView.findViewById((R.id.store_comment));
-            detail.setText(mComments.get(position));
+            number.setText(storeItems.get(position).getNumber());
+            comment = (TextView) convertView.findViewById((R.id.store_comment));
+            comment.setText(storeItems.get(position).getComment());
             name = (TextView) convertView.findViewById(R.id.store_name);
-            name.setText(mNames.get(position));
+            name.setText(storeItems.get(position).getName());
 
             dia.dismiss();
 
