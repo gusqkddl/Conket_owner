@@ -64,8 +64,9 @@ public class CouponFragment extends Fragment {
     List<Coupon> couponItems = new ArrayList<Coupon>();
     CouponAdapter adapter;
 
-    String url = "http://182.219.219.143:12345/DBServer/JSPServer/Coupon_info.jsp";
-    String url2 = "http://182.219.219.143:12345/DBServer/img/coupon/";
+    String ip_address;
+    String url;
+    String url2;
 
     static CouponFragment newInstance() {
         return new CouponFragment();
@@ -80,6 +81,10 @@ public class CouponFragment extends Fragment {
 
         Intent intent = getActivity().getIntent();
         shop_id = intent.getStringExtra("shop_id");
+
+        ip_address = this.getResources().getString(R.string.ip_address);
+        url = ip_address+":12345/DBServer/JSPServer/Coupon_info.jsp";
+        url2 = ip_address+":12345/DBServer/img/coupon/";
 
         btnreg = (Button) v.findViewById(R.id.btnreg);
         btnreg.setOnClickListener(new View.OnClickListener() {
@@ -108,23 +113,25 @@ public class CouponFragment extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try {
-                            JSONArray jsonArray = new JSONArray(response);
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                Coupon coupon = new Coupon();
-                                coupon.setDetail(jsonObject.getString("detail"));
-                                coupon.setUsedornot(jsonObject.getString("usedornot"));
-                                coupon.setExpired(jsonObject.getString("end_date"));
-                                coupon.setId(jsonObject.getString("coupon_id"));
-                                coupon.setImage_path(jsonObject.getString("img_path"));
+                        if (!response.equals("[]")) {
+                            try {
+                                JSONArray jsonArray = new JSONArray(response);
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                    Coupon coupon = new Coupon();
+                                    coupon.setDetail(jsonObject.getString("detail"));
+                                    coupon.setUsedornot(jsonObject.getString("usedornot"));
+                                    coupon.setExpired(jsonObject.getString("end_date"));
+                                    coupon.setId(jsonObject.getString("coupon_id"));
+                                    coupon.setImage_path(jsonObject.getString("img_path"));
 
-                                couponItems.add(coupon);
+                                    couponItems.add(coupon);
+                                }
+
+                                adapter.notifyDataSetChanged();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-
-                            adapter.notifyDataSetChanged();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
                     }
                 }, new Response.ErrorListener() {

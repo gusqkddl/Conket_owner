@@ -40,7 +40,8 @@ public class LoginActivity extends Activity implements OnClickListener {
     Button btnjoin, btnlogin, btnreserch;
     EditText editid, editpw;
 
-    String url = "http://182.219.219.143:12345/DBServer/JSPServer/Login.jsp";
+    String ip_address;
+    String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,9 @@ public class LoginActivity extends Activity implements OnClickListener {
         setContentView(R.layout.login);
         // 로딩화면 출력
         startActivity(new Intent(this, LoadingActivity.class));
+
+        ip_address = this.getResources().getString(R.string.ip_address);
+        url = ip_address+":12345/DBServer/JSPServer/Login.jsp";
 
         editid = (EditText) findViewById(R.id.editid);
         editpw = (EditText) findViewById(R.id.editpw);
@@ -89,7 +93,7 @@ public class LoginActivity extends Activity implements OnClickListener {
                             String confirm = json.getString("login");
                             if (confirm.equals("success")) {
                                 Intent login = new Intent(LoginActivity.this, StorelistActivity.class);
-                                login.putExtra("id", editid.getText().toString());
+                                login.putExtra("user_id", editid.getText().toString());
                                 startActivity(login);
                             } else if(confirm.equals("fail")) {
                                 System.out.println("로그인실패");

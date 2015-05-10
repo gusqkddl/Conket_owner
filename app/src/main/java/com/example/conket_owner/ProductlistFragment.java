@@ -76,8 +76,9 @@ public class ProductlistFragment extends Fragment {
     List<Product> productItems = new ArrayList<Product>();
     ProductAdapter adapter;
 
-    String url = "http://182.219.219.143:12345/DBServer/JSPServer/Product_info.jsp";
-    String url2 = "http://182.219.219.143:12345/DBServer/img/product/";
+    String ip_address;
+    String url;
+    String url2;
 
     static ProductlistFragment newInstance() {
         return new ProductlistFragment();
@@ -89,6 +90,10 @@ public class ProductlistFragment extends Fragment {
 
         this.inflater = inflater;
         v = inflater.inflate(R.layout.productlist, container, false);
+
+        ip_address = this.getResources().getString(R.string.ip_address);
+        url = ip_address+":12345/DBServer/JSPServer/Product_info.jsp";
+        url2 = ip_address+":12345/DBServer/img/product/";
 
         dia = new ProgressDialog(v.getContext());
         dia.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -124,25 +129,28 @@ public class ProductlistFragment extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try {
-                            JSONArray jsonArray = new JSONArray(response);
-                            for(int i = 0; i < jsonArray.length() ; i++)
-                            {
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                Product product = new Product();
-                                product.setName(jsonObject.getString("name"));
-                                product.setNumber(jsonObject.getString("origin"));
-                                product.setComment(jsonObject.getString("price"));
-                                product.setId(jsonObject.getString("goods_id"));
-                                product.setImage_path(jsonObject.getString("img_path"));
+                        if (!response.trim().equals("[]")) {
+                            try {
+                                JSONArray jsonArray = new JSONArray(response);
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                    Product product = new Product();
+                                    product.setName(jsonObject.getString("name"));
+                                    product.setNumber(jsonObject.getString("origin"));
+                                    product.setComment(jsonObject.getString("price"));
+                                    product.setId(jsonObject.getString("goods_id"));
+                                    product.setImage_path(jsonObject.getString("img_path"));
 
-                                productItems.add(product);
+                                    productItems.add(product);
+                                }
+
+                                adapter.notifyDataSetChanged();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-
-                            adapter.notifyDataSetChanged();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
+                        else
+                            dia.dismiss();
                     }
                 }, new Response.ErrorListener() {
             @Override

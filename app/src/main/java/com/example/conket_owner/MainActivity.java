@@ -49,7 +49,6 @@ public class MainActivity extends FragmentActivity implements
 
         // ?•¡?…˜ë°”ì— ?ƒ­ ì¶”ê?
         for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
-
             actionBar.addTab(actionBar.newTab()
                     .setText(mSectionsPagerAdapter.getPageTitle(i))
                     .setTabListener(this));

@@ -63,14 +63,20 @@ public class JoinActivity extends Activity implements OnClickListener {
     ProgressDialog dia;
     Context mContext = this;
 
-    String url = "http://182.219.219.143:12345/DBServer/JSPServer/Join.jsp";
-    String url2 = "http://182.219.219.143:12345/DBServer/JSPServer/ID_Confirm.jsp";
+    String ip_address;
+    String url;
+    String url2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.join);
+
+        ip_address = this.getResources().getString(R.string.ip_address);
+
+        url = ip_address+":12345/DBServer/JSPServer/Join.jsp";
+        url2 = ip_address+":12345/DBServer/JSPServer/ID_Confirm.jsp";
 
         btn_join = (Button) findViewById(R.id.btnjoin);
         btn_check = (Button) findViewById(R.id.btncheck);

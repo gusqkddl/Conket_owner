@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -68,9 +69,10 @@ public class StorelistActivity extends Activity implements OnItemClickListener, 
     ListView listView;
     Button btnreg;
 
+    String ip_address;
     String user_id;
-    String url = "http://182.219.219.143:12345/DBServer/JSPServer/Store_info.jsp";
-    String url2 = "http://182.219.219.143:12345/DBServer/img/store/";
+    String url;
+    String url2;
 
     ProgressDialog dia;
     private List<Store> storeItems = new ArrayList<Store>();
@@ -81,13 +83,17 @@ public class StorelistActivity extends Activity implements OnItemClickListener, 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.storelist);
 
+        ip_address = this.getResources().getString(R.string.ip_address);
+        url = ip_address+":12345/DBServer/JSPServer/Store_info.jsp";
+        url2 = ip_address+":12345/DBServer/img/store/";
+
         dia = new ProgressDialog(this);
         dia.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dia.setMessage("Wait..");
         dia.show();
 
         Intent intent = getIntent();
-        user_id = intent.getStringExtra("id");
+        user_id = intent.getStringExtra("user_id");
 
         listView = (ListView) findViewById(R.id.storelist);
         adapter = new StoreAdapter(this);
@@ -120,25 +126,27 @@ public class StorelistActivity extends Activity implements OnItemClickListener, 
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try {
-                            JSONArray jsonArray = new JSONArray(response);
-                            for(int i = 0; i < jsonArray.length() ; i++)
-                            {
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                Store store = new Store();
-                                store.setName(jsonObject.getString("name"));
-                                store.setNumber(jsonObject.getString("number"));
-                                store.setComment(jsonObject.getString("comment"));
-                                store.setId(jsonObject.getString("id"));
-                                store.setImage_path(jsonObject.getString("img_path"));
+                        if (!response.equals("[]")) {
+                            try {
+                                JSONArray jsonArray = new JSONArray(response);
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                    Store store = new Store();
+                                    store.setName(jsonObject.getString("name"));
+                                    store.setNumber(jsonObject.getString("number"));
+                                    store.setComment(jsonObject.getString("comment"));
+                                    store.setId(jsonObject.getString("id"));
+                                    store.setImage_path(jsonObject.getString("img_path"));
 
-                                storeItems.add(store);
+                                    storeItems.add(store);
+                                }
+                                adapter.notifyDataSetChanged();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-
-                            adapter.notifyDataSetChanged();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
+                        else
+                            dia.dismiss();
                     }
                 }, new Response.ErrorListener() {
             @Override
