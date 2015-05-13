@@ -14,14 +14,6 @@ public class Coupon {
 
     }
 
-    public Coupon(String detail, boolean usedornot, String expired, String image_path, String coupon_id) {
-        this.mDetail = detail;
-        this.mUsedorNot = usedornot;
-        this.mExpired = expired;
-        this.mImage_path = image_path;
-        this.mCoupon_Id = coupon_id;
-    }
-
     public String getDetail() {
         return mDetail;
     }

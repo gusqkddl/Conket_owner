@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -17,12 +18,17 @@ public class MainActivity extends FragmentActivity implements
 
     SectionsPagerAdapter mSectionsPagerAdapter;
     ViewPager mViewPager;
+    User connected_user;
+    String shop_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent = getIntent();
+        connected_user = (User)intent.getParcelableExtra("connected_user");
+        shop_id = intent.getStringExtra("shop_id");
 
         //?Ñ§ÎπÑÍ≤å?ù¥?Öò ?É≠ ?òï?ãù?úºÎ°? ?ï°?ÖòÎ∞? ?Ñ§?†ï
         final ActionBar actionBar = getActionBar();

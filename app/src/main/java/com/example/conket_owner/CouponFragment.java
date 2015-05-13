@@ -56,6 +56,8 @@ import java.util.Map;
 public class CouponFragment extends Fragment {
 
     String shop_id;
+    User connected_user;
+
     Button btnreg;
     ListView listView;
     View v;
@@ -81,6 +83,7 @@ public class CouponFragment extends Fragment {
 
         Intent intent = getActivity().getIntent();
         shop_id = intent.getStringExtra("shop_id");
+        connected_user = (User)intent.getParcelableExtra("connected_user");
 
         ip_address = this.getResources().getString(R.string.ip_address);
         url = ip_address+":12345/DBServer/JSPServer/Coupon_info.jsp";

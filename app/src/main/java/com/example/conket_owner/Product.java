@@ -14,14 +14,6 @@ public class Product {
 
     }
 
-    public Product(String name, String origin, String price, String image_path, String shop_id) {
-        this.mName = name;
-        this.mOrigin = origin;
-        this.mPrice = price;
-        this.mImage_path = image_path;
-        this.mShop_Id = shop_id;
-    }
-
     public String getName() {
         return mName;
     }

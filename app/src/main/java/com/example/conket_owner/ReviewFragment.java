@@ -39,7 +39,9 @@ public class ReviewFragment extends Fragment {
     ListView listView;
     View v;
     LayoutInflater inflater;
+
     String shop_id;
+    User connected_user;
 
     List<Review> reviewItems = new ArrayList<Review>();
     ReviewAdapter adapter;
@@ -64,6 +66,7 @@ public class ReviewFragment extends Fragment {
 
         Intent intent = getActivity().getIntent();
         shop_id = intent.getStringExtra("shop_id");
+        connected_user = (User)intent.getParcelableExtra("connected_user");
 
         btnwrite = (Button) v.findViewById(R.id.btnwrite);
         btnwrite.setOnClickListener(new View.OnClickListener() {
@@ -71,9 +74,11 @@ public class ReviewFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent write = new Intent(getActivity()
+                Intent intent = new Intent(getActivity()
                         .getApplicationContext(), ReviewwriteActivity.class);
-                startActivity(write);
+                intent.putExtra("shop_id", shop_id);
+                intent.putExtra("connected_user", connected_user);
+                startActivity(intent);
 
             }
         });

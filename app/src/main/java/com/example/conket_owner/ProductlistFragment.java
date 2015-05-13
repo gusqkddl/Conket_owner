@@ -70,7 +70,9 @@ public class ProductlistFragment extends Fragment {
     GridView gridView;
     View v;
     LayoutInflater inflater;
+
     String shop_id;
+    User connected_user;
     ProgressDialog dia;
 
     List<Product> productItems = new ArrayList<Product>();
@@ -102,6 +104,7 @@ public class ProductlistFragment extends Fragment {
 
         Intent intent = getActivity().getIntent();
         shop_id = intent.getStringExtra("shop_id");
+        connected_user = (User)intent.getParcelableExtra("connected_user");
 
         btnreg = (Button)v.findViewById(R.id.btnreg);
         btnreg.setOnClickListener(new View.OnClickListener() {

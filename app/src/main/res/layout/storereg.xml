@@ -80,7 +80,7 @@
             android:textSize="15sp" />
 
         <EditText
-            android:id="@+id/editphone"
+            android:id="@+id/editstophone"
             android:layout_width="190dp"
             android:layout_height="30dp"
             android:background="#efefef"
@@ -125,7 +125,7 @@
             android:textSize="15sp" />
 
         <EditText
-            android:id="@+id/editbeaid"
+            android:id="@+id/editstobeaid"
             android:layout_width="190dp"
             android:layout_height="30dp"
             android:layout_marginTop="15dp"

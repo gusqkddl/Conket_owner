@@ -97,7 +97,6 @@ public class JoinActivity extends Activity implements OnClickListener {
         switch (v.getId()) {
             case R.id.btnjoin:
                 if (idcheck == true) {
-
                     if (!edit_id.getText().equals("") &&
                             !edit_pw.getText().equals("") &&
                             !edit_pwcheck.getText().equals("") &&

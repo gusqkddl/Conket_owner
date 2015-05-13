@@ -37,6 +37,8 @@ import java.util.Map;
 
 public class LoginActivity extends Activity implements OnClickListener {
 
+    User connected_user;
+
     Button btnjoin, btnlogin, btnreserch;
     EditText editid, editpw;
 
@@ -50,6 +52,8 @@ public class LoginActivity extends Activity implements OnClickListener {
         setContentView(R.layout.login);
         // 로딩화면 출력
         startActivity(new Intent(this, LoadingActivity.class));
+
+        connected_user = new User();
 
         ip_address = this.getResources().getString(R.string.ip_address);
         url = ip_address+":12345/DBServer/JSPServer/Login.jsp";
@@ -92,8 +96,11 @@ public class LoginActivity extends Activity implements OnClickListener {
                             JSONObject json = new JSONObject(response);
                             String confirm = json.getString("login");
                             if (confirm.equals("success")) {
+                                connected_user.setId(editid.getText().toString());
+                                connected_user.setName(json.getString("user_name"));
+                                connected_user.setPhone(json.getString("phone"));
                                 Intent login = new Intent(LoginActivity.this, StorelistActivity.class);
-                                login.putExtra("user_id", editid.getText().toString());
+                                login.putExtra("connected_user", connected_user);
                                 startActivity(login);
                             } else if(confirm.equals("fail")) {
                                 System.out.println("로그인실패");

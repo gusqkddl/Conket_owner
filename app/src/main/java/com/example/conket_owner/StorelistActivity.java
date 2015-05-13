@@ -70,9 +70,11 @@ public class StorelistActivity extends Activity implements OnItemClickListener, 
     Button btnreg;
 
     String ip_address;
-    String user_id;
     String url;
     String url2;
+
+    //앱을 사용중인 유저
+    User connected_user;
 
     ProgressDialog dia;
     private List<Store> storeItems = new ArrayList<Store>();
@@ -92,8 +94,9 @@ public class StorelistActivity extends Activity implements OnItemClickListener, 
         dia.setMessage("Wait..");
         dia.show();
 
+        //사용자정보 가져오기
         Intent intent = getIntent();
-        user_id = intent.getStringExtra("user_id");
+        connected_user = (User)intent.getParcelableExtra("connected_user");
 
         listView = (ListView) findViewById(R.id.storelist);
         adapter = new StoreAdapter(this);
@@ -109,14 +112,16 @@ public class StorelistActivity extends Activity implements OnItemClickListener, 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.putExtra("shop_id", storeItems.get(position).getId());
+        intent.putExtra("connected_user", connected_user);
         startActivity(intent);
     }
 
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		Intent storereg = new Intent(this, StoreregActivity.class);
-		startActivity(storereg);
+		Intent intent = new Intent(this, StoreregActivity.class);
+        intent.putExtra("connected_user", connected_user);
+		startActivity(intent);
 	}
 
     void getStoreInfo(String url) {
@@ -126,7 +131,7 @@ public class StorelistActivity extends Activity implements OnItemClickListener, 
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        if (!response.equals("[]")) {
+                        if (!response.trim().equals("[]")) {
                             try {
                                 JSONArray jsonArray = new JSONArray(response);
                                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -157,7 +162,7 @@ public class StorelistActivity extends Activity implements OnItemClickListener, 
             @Override
             protected Map<String,String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<String, String>();
-                params.put("user_id", user_id);
+                params.put("user_id", connected_user.getId());
                 return params;
             }
         };

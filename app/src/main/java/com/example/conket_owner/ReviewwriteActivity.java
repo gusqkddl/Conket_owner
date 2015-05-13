@@ -19,6 +19,8 @@ import android.widget.PopupMenu;
 
 public class ReviewwriteActivity  extends Activity implements OnClickListener {
 
+    String shop_id;
+    User connected_user;
     Button btncamera, btnwrite;
     final static int SELECT_IMAGE = 1;
     private static final int CAMERA_CAPTURE = 0;
@@ -28,6 +30,10 @@ public class ReviewwriteActivity  extends Activity implements OnClickListener {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reviewwrite);
+
+        Intent intent = getIntent();
+        shop_id = intent.getStringExtra("shop_id");
+        connected_user = (User)intent.getParcelableExtra("connected_user");
 
         btnwrite = (Button)findViewById(R.id.btnwrite);
         btnwrite.setOnClickListener(this);
@@ -103,8 +109,10 @@ public class ReviewwriteActivity  extends Activity implements OnClickListener {
     @Override
     public void onClick(View v) {
         // TODO Auto-generated method stub
-        finish();
-
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("shop_id", shop_id);
+        intent.putExtra("connected_user", connected_user);
+        startActivity(intent);
     }
 
 }

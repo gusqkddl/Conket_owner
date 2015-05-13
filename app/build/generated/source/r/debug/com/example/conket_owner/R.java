@@ -45,7 +45,7 @@ public final class R {
         public static final int strawberry=0x7f020018;
     }
     public static final class id {
-        public static final int action_settings=0x7f09003d;
+        public static final int action_settings=0x7f09003e;
         public static final int atologin=0x7f09001d;
         public static final int btnbacklogin=0x7f090001;
         public static final int btncamera=0x7f090031;
@@ -56,7 +56,7 @@ public final class R {
         public static final int btnreserch=0x7f09001e;
         public static final int btnsave=0x7f090012;
         public static final int btnwrite=0x7f09002b;
-        public static final int camera=0x7f09003a;
+        public static final int camera=0x7f09003b;
         public static final int cameraview=0x7f090009;
         public static final int chnew=0x7f090029;
         public static final int chpull=0x7f090011;
@@ -66,7 +66,6 @@ public final class R {
         public static final int coupon_image=0x7f090004;
         public static final int couponlist=0x7f090003;
         public static final int editamount=0x7f090026;
-        public static final int editbeaid=0x7f090039;
         public static final int editday=0x7f09000c;
         public static final int editday2=0x7f09000f;
         public static final int editeffet=0x7f090028;
@@ -80,12 +79,14 @@ public final class R {
         public static final int editprice=0x7f090024;
         public static final int editpw=0x7f090015;
         public static final int editpwcheck=0x7f090016;
-        public static final int editstoinfo=0x7f090038;
+        public static final int editstobeaid=0x7f09003a;
+        public static final int editstoinfo=0x7f090039;
         public static final int editstoname=0x7f090037;
         public static final int editstonum=0x7f090017;
+        public static final int editstophone=0x7f090038;
         public static final int edityear=0x7f09000a;
         public static final int edityear2=0x7f09000d;
-        public static final int modify=0x7f09003c;
+        public static final int modify=0x7f09003d;
         public static final int pager=0x7f090000;
         public static final int pro_from=0x7f090022;
         public static final int pro_image=0x7f09001f;
@@ -97,7 +98,7 @@ public final class R {
         public static final int review_image=0x7f09002d;
         public static final int review_list=0x7f09002c;
         public static final int review_user_id=0x7f09002e;
-        public static final int select=0x7f09003b;
+        public static final int select=0x7f09003c;
         public static final int spinamount=0x7f090027;
         public static final int stoid=0x7f09001c;
         public static final int store_comment=0x7f090035;
