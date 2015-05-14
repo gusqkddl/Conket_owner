@@ -7,6 +7,7 @@ import java.util.Date;
  */
 public class Review {
     private String mUser_id;
+    private String mShop_id;
     private String mReview;
     private String mDate;
     private String mReview_id;
@@ -30,6 +31,14 @@ public class Review {
 
     public void setUser_Id(String user_id) {
         this.mUser_id = user_id;
+    }
+
+    public String getShop_Id() {
+        return mShop_id;
+    }
+
+    public void setShop_Id(String shop_id) {
+        this.mShop_id = shop_id;
     }
 
     public String getReview() {

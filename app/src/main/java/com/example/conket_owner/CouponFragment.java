@@ -95,9 +95,11 @@ public class CouponFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent couponreg = new Intent(getActivity()
+                Intent intent = new Intent(getActivity()
                         .getApplicationContext(), CouponregActivity.class);
-                startActivity(couponreg);
+                intent.putExtra("shop_id", shop_id);
+                intent.putExtra("connected_user", connected_user);
+                startActivity(intent);
             }
         });
 
@@ -123,7 +125,7 @@ public class CouponFragment extends Fragment {
                                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                                     Coupon coupon = new Coupon();
                                     coupon.setDetail(jsonObject.getString("detail"));
-                                    coupon.setUsedornot(jsonObject.getString("usedornot"));
+                                    //coupon.setUsedornot(jsonObject.getString("usedornot"));
                                     coupon.setExpired(jsonObject.getString("end_date"));
                                     coupon.setId(jsonObject.getString("coupon_id"));
                                     coupon.setImage_path(jsonObject.getString("img_path"));
@@ -190,12 +192,12 @@ public class CouponFragment extends Fragment {
 
             detail = (TextView) convertView.findViewById(R.id.coupon_detail);
             detail.setText(couponItems.get(position).getDetail());
-            usedornot = (CheckBox) convertView.findViewById((R.id.usedornot));
-            if(couponItems.get(position).getUsedornot())
-                usedornot.setChecked(true);
-            else
-                usedornot.setChecked(false);
-            usedornot.setEnabled(false);
+            //usedornot = (CheckBox) convertView.findViewById((R.id.usedornot));
+            //if(couponItems.get(position).getUsedornot())
+            //    usedornot.setChecked(true);
+            //else
+            //    usedornot.setChecked(false);
+            //usedornot.setEnabled(false);
             expired = (TextView) convertView.findViewById(R.id.coupon_expired);
             expired.setText(couponItems.get(position).getExpired());
 

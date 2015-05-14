@@ -1,5 +1,7 @@
 package com.example.conket_owner;
 
+import android.text.Editable;
+
 /**
  * Created by user on 2015-05-10.
  */
@@ -9,6 +11,9 @@ public class Coupon {
     private String mExpired;
     private String mCoupon_Id;
     private String mImage_path;
+    private String mStarted;
+    private String mShop_id;
+    private boolean mIs_pull;
 
     public Coupon() {
 
@@ -45,6 +50,14 @@ public class Coupon {
         this.mExpired = expired;
     }
 
+    public String getStarted() {
+        return mStarted;
+    }
+
+    public void setStarted(String started) {
+        this.mStarted = started;
+    }
+
     public String getImage_path() {
         return mImage_path;
     }
@@ -60,5 +73,22 @@ public class Coupon {
     public void setId(String id) {
         this.mCoupon_Id = id;
     }
+
+    public String getShopid() {
+        return mShop_id;
+    }
+
+    public void setShopid(String shopid) {
+        this.mShop_id = shopid;
+    }
+
+    public boolean getPull() {
+        return mIs_pull;
+    }
+
+    public void setPull(boolean is_pull) {
+        this.mIs_pull = is_pull;
+    }
 }
+
 

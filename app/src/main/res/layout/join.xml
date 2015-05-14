@@ -109,26 +109,6 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="사업자 번호"
-                android:textSize="13dp" />
-
-            <EditText
-                android:id="@+id/editstonum"
-                android:layout_width="220dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:background="#FFFFFF"
-                android:hint="사업자 번호를 입력하세요"
-                android:textSize="13dp" />
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-                android:layout_width="50dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
                 android:text="이름"
                 android:textSize="13dp" />
 
@@ -166,7 +146,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:layout_marginTop="40dp"
         android:baselineAligned="true"
         android:orientation="vertical" >

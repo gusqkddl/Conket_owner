@@ -112,8 +112,10 @@ public class ProductlistFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent productreg = new Intent(getActivity().getApplicationContext(), ProductregActivity.class );
-                startActivity(productreg);
+                Intent intent = new Intent(getActivity().getApplicationContext(), ProductregActivity.class );
+                intent.putExtra("shop_id", shop_id);
+                intent.putExtra("connected_user", connected_user);
+                startActivity(intent);
             }
         });
 
@@ -139,7 +141,7 @@ public class ProductlistFragment extends Fragment {
                                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                                     Product product = new Product();
                                     product.setName(jsonObject.getString("name"));
-                                    product.setNumber(jsonObject.getString("origin"));
+                                    product.setOrigin(jsonObject.getString("origin"));
                                     product.setComment(jsonObject.getString("price"));
                                     product.setId(jsonObject.getString("goods_id"));
                                     product.setImage_path(jsonObject.getString("img_path"));
@@ -207,11 +209,11 @@ public class ProductlistFragment extends Fragment {
             imageView.setImageUrl(url2+product.getImage_path(), imageLoader);
 
             name = (TextView) convertView.findViewById(R.id.pro_name);
-            name.setText(productItems.get(position).getNumber());
+            name.setText(productItems.get(position).getName());
             origin = (TextView) convertView.findViewById((R.id.pro_from));
             origin.setText(productItems.get(position).getComment());
             price = (TextView) convertView.findViewById(R.id.pro_price);
-            price.setText(productItems.get(position).getName());
+            price.setText(productItems.get(position).getPrice());
 
             dia.dismiss();
 

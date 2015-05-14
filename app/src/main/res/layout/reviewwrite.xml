@@ -40,6 +40,7 @@
             android:background="#000000"
             >
             <EditText
+                android:id="@+id/review_write"
                 android:layout_width="340dp"
                 android:layout_height="170dp"
                 android:layout_gravity="center"
@@ -58,7 +59,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btncamera"
+            android:id="@+id/review_camera"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="20dp"

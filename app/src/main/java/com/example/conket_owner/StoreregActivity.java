@@ -78,7 +78,6 @@ public class StoreregActivity extends Activity implements OnClickListener {
     String url;
     String url2;
     User connected_user;
-    String shop_id;
     EditText et_sto_name;
     EditText et_sto_num;
     EditText et_sto_phone;
@@ -153,8 +152,11 @@ public class StoreregActivity extends Activity implements OnClickListener {
                     case R.id.camera://사진 촬영
                         Intent i = new Intent(
                                 android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                        Random random = new Random();
+                        Integer r = random.nextInt();
+                        file = new File("/sdcard/"+r.toString()+".jpg");
                         i.putExtra(android.provider.MediaStore.EXTRA_OUTPUT,
-                                Uri.fromFile(new File("/sdcard/image.jpg")));
+                                Uri.fromFile(file));
                         startActivityForResult(i, CAMERA_CAPTURE);
                         break;
 
@@ -163,7 +165,6 @@ public class StoreregActivity extends Activity implements OnClickListener {
                         Intent intent = new Intent(Intent.ACTION_PICK, uri);
                         startActivityForResult(intent, SELECT_IMAGE);
                         break;
-
                 }
                 return true;
             }
@@ -267,13 +268,9 @@ public class StoreregActivity extends Activity implements OnClickListener {
         protected void onPostExecute(InputStream response) {
             try {
                 JSONObject json = new JSONObject(response.toString());
-                String confirm = json.getString("store");
-                if(confirm.equals("success"))
-                {
-                    Intent login = new Intent(StoreregActivity.this, StorelistActivity.class);
-                    login.putExtra("connected_user", connected_user);
-                    startActivity(login);
-                }
+                Intent login = new Intent(StoreregActivity.this, StorelistActivity.class);
+                login.putExtra("connected_user", connected_user);
+                startActivity(login);
 
             } catch (JSONException e) {
                 e.printStackTrace();

@@ -32,6 +32,23 @@
                     android:layout_marginTop="10dp"
                     android:background="#ffbcaf"
                     android:gravity="center"
+                    android:text="상품명"
+                    android:textColor="#7f7f7f"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/editname"
+                    android:layout_width="160dp"
+                    android:layout_height="30dp"
+                    android:background="#efefef"
+                    android:gravity="center" />
+
+                <TextView
+                    android:layout_width="160dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#ffbcaf"
+                    android:gravity="center"
                     android:text="가격"
                     android:textColor="#7f7f7f"
                     android:textSize="15sp" />
@@ -169,7 +186,7 @@
     <EditText
         android:id="@+id/editeffet"
         android:layout_width="340dp"
-        android:layout_height="120dp"
+        android:layout_height="80dp"
         android:layout_marginStart="10dp"
         android:background="#efefef"
         android:hint="효능을 입력하세요"

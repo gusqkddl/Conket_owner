@@ -56,7 +56,6 @@ public class JoinActivity extends Activity implements OnClickListener {
     EditText edit_id;
     EditText edit_pw;
     EditText edit_pwcheck;
-    EditText edit_stonum;
     EditText edit_na;
     EditText edit_phone;
     boolean idcheck = false;
@@ -84,7 +83,6 @@ public class JoinActivity extends Activity implements OnClickListener {
         edit_id = (EditText) findViewById(R.id.editid);
         edit_pw = (EditText) findViewById(R.id.editpw);
         edit_pwcheck = (EditText) findViewById(R.id.editpwcheck);
-        edit_stonum = (EditText) findViewById(R.id.editstonum);
         edit_na = (EditText) findViewById(R.id.editna);
         edit_phone = (EditText) findViewById(R.id.editphone);
 
@@ -157,7 +155,6 @@ public class JoinActivity extends Activity implements OnClickListener {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("id", edit_id.getText().toString());
                 params.put("pw", edit_pw.getText().toString());
-                params.put("storenum", edit_stonum.getText().toString());
                 params.put("name", edit_na.getText().toString());
                 params.put("role", "owner".toString());
                 params.put("phone", edit_phone.getText().toString());

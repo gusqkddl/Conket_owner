@@ -14,7 +14,8 @@
         android:layout_width="170dp"
         android:layout_height="100dp"
         android:layout_toRightOf="@+id/coupon_image"
-        android:id="@+id/text_layout">
+        android:id="@+id/text_layout"
+        android:layout_alignParentEnd="true">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,15 +26,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dip"
         android:layout_below="@id/coupon_detail"
+        android:textColor="#ff0000"
+        android:text="만료일 : "
+        android:id="@+id/tmp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="58dip"
+        android:layout_toRightOf="@id/tmp"
         android:text="New Text"
         android:id="@+id/coupon_expired" />
     </RelativeLayout>
-    <CheckBox
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/text_layout"
-        android:layout_marginTop="30dp"
-        android:text="쿠폰사용"
-        android:textSize="10dp"
-        android:id="@+id/usedornot" />
 </RelativeLayout>
